@@ -1,0 +1,24 @@
+{
+  "deployment": {
+    "type": "frontend-only",
+    "skipSupabase": true,
+    "skipEdgeFunctions": true,
+    "skipServerFunctions": true,
+    "disableSupabaseIntegration": true,
+    "buildCommand": "npm run build",
+    "outputDirectory": "dist"
+  },
+  "supabase": {
+    "enabled": false,
+    "skipDeploy": true,
+    "skipEdgeFunctions": true,
+    "disconnected": true
+  },
+  "edgeFunctions": {
+    "enabled": false,
+    "deploy": false
+  },
+  "integrations": {
+    "supabase": false
+  }
+}

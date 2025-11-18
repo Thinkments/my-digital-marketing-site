@@ -1,0 +1,15 @@
+{
+  "enabled": false,
+  "connected": false,
+  "deployEdgeFunctions": false,
+  "skipDeploy": true,
+  "functions": {
+    "enabled": false,
+    "deploy": false
+  },
+  "edgeFunctions": {
+    "enabled": false,
+    "deploy": false
+  },
+  "note": "This is a frontend-only application. No Supabase features should be deployed."
+}

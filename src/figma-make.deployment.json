@@ -1,0 +1,50 @@
+{
+  "$schema": "https://figma.com/schemas/make-deployment.json",
+  "version": "1.0",
+  "project": {
+    "name": "ThinkMents Website",
+    "type": "frontend-only",
+    "description": "Static frontend application with no backend"
+  },
+  "deployment": {
+    "platform": "static",
+    "framework": "vite",
+    "skipSupabase": true,
+    "skipEdgeFunctions": true,
+    "skipServerFunctions": true,
+    "disableBackend": true
+  },
+  "build": {
+    "command": "npm run build",
+    "outputDirectory": "dist",
+    "installCommand": "npm install"
+  },
+  "integrations": {
+    "supabase": {
+      "enabled": false,
+      "connected": false,
+      "deployFunctions": false,
+      "deployEdgeFunctions": false,
+      "skip": true
+    }
+  },
+  "functions": {
+    "enabled": false,
+    "directory": null,
+    "deploy": false
+  },
+  "edgeFunctions": {
+    "enabled": false,
+    "directory": null,
+    "deploy": false
+  },
+  "ignore": [
+    "supabase/",
+    "supabase/functions/",
+    "utils/supabase/",
+    "functions/",
+    "edge_functions/",
+    "*.md",
+    "!README.md"
+  ]
+}

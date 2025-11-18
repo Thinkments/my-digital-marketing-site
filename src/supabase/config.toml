@@ -1,0 +1,11 @@
+# Supabase Configuration
+# THIS PROJECT IS FRONTEND-ONLY - NO EDGE FUNCTIONS SHOULD BE DEPLOYED
+
+[functions]
+enabled = false
+
+[edge_functions]
+enabled = false
+
+[api]
+enabled = false
