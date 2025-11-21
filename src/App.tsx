@@ -49,6 +49,10 @@ import RobotsTxtPlain from './components/pages/RobotsTxtPlain';
 import RobotsTestPage from './components/pages/RobotsTestPage';
 import LlmPage from './components/pages/LlmPage';
 import AdminPage from './components/pages/AdminPage';
+import AdminDashboard from './components/pages/AdminDashboard';
+import BlogCreatorPage from './components/pages/BlogCreatorPage';
+import PhotoManager from './components/pages/PhotoManager';
+import SocialMediaGenerator from './components/pages/SocialMediaGenerator';
 
 // Route Configurations
 import { LOCATION_ROUTES, SERVICE_ROUTES, REDIRECT_ROUTES } from './config/routes';
@@ -56,7 +60,7 @@ import { LOCATION_ROUTES, SERVICE_ROUTES, REDIRECT_ROUTES } from './config/route
 // Layout component that conditionally renders Header and Footer
 function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
-  
+
   // Routes that should not have Header/Footer (raw XML/text routes)
   const noLayoutRoutes = ['/sitemap-xml', '/sitemap.xml', '/sitemap-raw', '/robots-txt', '/llm-txt'];
   const shouldHideLayout = noLayoutRoutes.includes(location.pathname);
@@ -81,29 +85,29 @@ function AppRoutes() {
     <Routes>
       {/* Homepage */}
       <Route path="/" element={<HomePage />} />
-      
+
       {/* Redirect routes */}
       {REDIRECT_ROUTES.map(({ from, to }) => (
         <Route key={from} path={from} element={<Navigate to={to} replace />} />
       ))}
-      
+
       {/* About routes */}
       <Route path="/about" element={<AboutPage />} />
       <Route path="/our-story" element={<OurStoryPage />} />
-      
+
       {/* Service routes */}
       <Route path="/services" element={<ServicesPage />} />
       {SERVICE_ROUTES.map(({ path, service }) => (
         <Route key={path} path={`/services/${path}`} element={<ServiceDetailPage service={service} />} />
       ))}
-      
+
       {/* Main service pages */}
       <Route path="/web-design" element={<WebDesignPage />} />
       <Route path="/virtual-tours" element={<VirtualToursPage />} />
       <Route path="/digital-marketing" element={<DigitalMarketingPage />} />
 
       <Route path="/videography" element={<VideographyPage />} />
-      
+
       {/* Specialized service pages */}
       <Route path="/strategic-seo" element={<StrategicSEOPage />} />
       <Route path="/artificial-intelligence-optimization" element={<AIOptimizationPage />} />
@@ -115,34 +119,34 @@ function AppRoutes() {
       <Route path="/Google-Business-Profile-Foundation-Audit-&-Setup" element={<GoogleBusinessProfileFoundationPage />} />
       <Route path="/Google-Business-Profile-Concierge-Ultimate-Visibility" element={<GoogleBusinessProfileEinsteinium />} />
       <Route path="/Google-Business-Profile-Growth-Enhanced-Essentials" element={<GoogleBusinessProfileGrowthEnhancedPage />} />
-      
+
       {/* Location-specific digital marketing pages */}
       {LOCATION_ROUTES.map(location => (
-        <Route 
-          key={location} 
-          path={`/digital-marketing-${location}`} 
-          element={<LocationMarketingPage location={location} />} 
+        <Route
+          key={location}
+          path={`/digital-marketing-${location}`}
+          element={<LocationMarketingPage location={location} />}
         />
       ))}
-      
+
       {/* Store routes */}
       <Route path="/store" element={<StorePage />} />
       <Route path="/store/p/:productSlug" element={<ProductPage />} />
-      
+
       {/* Content routes */}
       <Route path="/case-studies" element={<CaseStudiesPage />} />
       <Route path="/blog" element={<BlogPage />} />
       <Route path="/blog/:slug" element={<BlogPostPage />} />
-      
+
       {/* Contact routes */}
       <Route path="/contact" element={<ContactPage />} />
       <Route path="/get-a-quote" element={<QuotePage />} />
-      
+
       {/* Legal pages */}
       <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
       <Route path="/terms-of-service" element={<TermsOfServicePage />} />
       <Route path="/design-transfer-agreement" element={<DesignTransferAgreementPage />} />
-      
+
       {/* SEO and Technical pages - extensionless URLs for Figma Make compatibility */}
       <Route path="/sitemap" element={<SitemapPage />} />
       <Route path="/sitemap.xml" element={<SitemapXmlPage />} />
@@ -151,10 +155,13 @@ function AppRoutes() {
       <Route path="/robots-txt" element={<RobotsTxtPlain />} />
       <Route path="/robots" element={<RobotsPage />} />
       <Route path="/llm-txt" element={<LlmPage />} />
-      
-      {/* Admin */}
-      <Route path="/admin" element={<AdminPage />} />
-      
+
+      {/* Admin Dashboard - NEW */}
+      <Route path="/admin" element={<AdminDashboard />} />
+      <Route path="/admin/blog-creator" element={<BlogCreatorPage />} />
+      <Route path="/admin/photo-manager" element={<PhotoManager />} />
+      <Route path="/admin/social-media" element={<SocialMediaGenerator />} />
+
       {/* Catch-all route */}
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
