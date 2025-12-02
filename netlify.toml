@@ -3,14 +3,14 @@
   publish = "build"
   functions = "netlify/functions"
 
-# Redirect www to non-www (canonical domain)
+# Redirect www to non-www
 [[redirects]]
   from = "https://www.thinkments.com/*"
   to = "https://thinkments.com/:splat"
   status = 301
   force = true
 
-# Redirect netlify subdomain to custom domain
+# Redirect netlify subdomain
 [[redirects]]
   from = "https://thinkments-website.netlify.app/*"
   to = "https://thinkments.com/:splat"
@@ -38,3 +38,9 @@
   from = "/sitemap-raw"
   to = "/sitemap.xml"
   status = 301
+
+# Password protect ONLY admin pages
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    Basic-Auth = "admin:ThinkMents2025"
