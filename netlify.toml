@@ -44,3 +44,9 @@
   for = "/admin/*"
   [headers.values]
     Basic-Auth = "admin:ThinkMents2025"
+
+# SPA Catch-all - MUST BE LAST
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
