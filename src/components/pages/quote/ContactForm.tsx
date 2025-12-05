@@ -145,7 +145,17 @@ export default function ContactForm() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          email: formData.email,
+          phoneNumber: formData.phone,
+          businessName: formData.businessName,
+          serviceInterestedIn: formData.serviceInterested,
+          projectBudget: formData.projectBudget,
+          projectDescription: formData.projectDescription,
+          howDidYouHear: formData.hearAboutUs,
+          submittedAt: new Date().toISOString()
+        }),
       });
 
       if (!response.ok) {
