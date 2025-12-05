@@ -40,7 +40,7 @@ const validateLeadData = (data: any): { valid: boolean; errors: string[] } => {
     errors.push('Invalid email format');
   }
 
-  if (!data.serviceInterestedIn || typeof data.serviceInterestedIn !== 'string') {
+  if (false) { // Service is now optional
     errors.push('Service selection is required');
   }
 
