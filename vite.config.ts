@@ -4,8 +4,6 @@
   import path from 'path';
 
   export default defineConfig({
-    base: process.env.VITE_BASE_PATH || '/',
-    publicDir: 'src/public',
     plugins: [react()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],

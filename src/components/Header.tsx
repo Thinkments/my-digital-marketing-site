@@ -11,6 +11,18 @@ export default function Header() {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const location = useLocation();
 
+  // Check if we're on the Get Quote page
+  const isQuotePage = location.pathname === '/get-a-quote';
+  
+  // Check if we're on the Virtual Tours page
+  const isVirtualToursPage = location.pathname === '/services/virtual-tours';
+  
+  // Check if we're on the AI Podcast Production page
+  const isAIPodcastPage = location.pathname === '/ai-podcast-production';
+  
+  // Use white text on Quote, Virtual Tours, or AI Podcast Production pages
+  const useWhiteText = isQuotePage || isVirtualToursPage || isAIPodcastPage;
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -91,7 +103,11 @@ export default function Header() {
           <nav className="hidden md:flex items-center space-x-8">
             <div className="relative">
               <motion.button
-                className="flex items-center space-x-1 text-foreground hover:text-primary transition-colors"
+                className={`flex items-center space-x-1 transition-colors ${
+                  useWhiteText 
+                    ? 'text-white hover:text-[#96FFBF]' 
+                    : 'text-foreground hover:text-primary'
+                }`}
                 onMouseEnter={() => setIsServicesOpen(true)}
                 onMouseLeave={() => setIsServicesOpen(false)}
                 whileHover={{ scale: 1.05 }}
@@ -139,14 +155,19 @@ export default function Header() {
             {[
               { name: 'Case Studies', href: '/case-studies' },
               { name: 'Blog', href: '/blog' },
-              { name: 'About', href: '/about' },
-              { name: 'Contact', href: '/contact' }
+              { name: 'About', href: '/about' }
             ].map((item) => (
               <motion.div key={item.href} whileHover={{ scale: 1.05 }}>
                 <Link
                   to={item.href}
-                  className={`transition-colors text-foreground hover:text-primary ${
-                    location.pathname === item.href ? 'text-primary font-medium' : ''
+                  className={`transition-colors ${
+                    useWhiteText 
+                      ? 'text-white hover:text-[#96FFBF]' 
+                      : 'text-foreground hover:text-primary'
+                  } ${
+                    location.pathname === item.href ? 'font-medium' : ''
+                  } ${
+                    location.pathname === item.href && !useWhiteText ? 'text-primary' : ''
                   }`}
                 >
                   {item.name}
@@ -166,7 +187,9 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <motion.button
-            className="md:hidden text-foreground transition-colors"
+            className={`md:hidden transition-colors ${
+              useWhiteText ? 'text-white' : 'text-foreground'
+            }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             whileTap={{ scale: 0.95 }}
           >
@@ -232,8 +255,7 @@ export default function Header() {
                 {[
                   { name: 'Case Studies', href: '/case-studies' },
                   { name: 'Blog', href: '/blog' },
-                  { name: 'About', href: '/about' },
-                  { name: 'Contact', href: '/contact' }
+                  { name: 'About', href: '/about' }
                 ].map((item, index) => (
                   <motion.div
                     key={item.href}

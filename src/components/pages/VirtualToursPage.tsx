@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '../ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Badge } from '../ui/badge';
-import { Camera, Eye, MapPin, Smartphone, Users, TrendingUp, ArrowRight, CheckCircle, Play } from 'lucide-react';
+import { Camera, Eye, MapPin, Smartphone, Users, TrendingUp, ArrowRight, CheckCircle, Play, Maximize2, Circle } from 'lucide-react';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 
 export default function VirtualToursPage() {
@@ -135,51 +135,252 @@ export default function VirtualToursPage() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-b from-background to-muted/20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.h1
-              className="text-4xl md:text-5xl lg:text-6xl mb-6"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              Immersive{' '}
-              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                Virtual Tours
-              </span>{' '}
-              & Photography
-            </motion.h1>
-            
-            <motion.p
-              className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              Transform how customers experience your business with stunning 360° virtual tours. Increase engagement, build trust, and drive more sales with immersive virtual experiences.
-            </motion.p>
-
+      {/* Hero Section with Animated 3D Background */}
+      <section className="relative w-full h-screen overflow-hidden bg-gradient-to-br from-[#0A8460] via-[#1A1A1A] to-[#000000]">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0">
+          {/* Animated Gradient Orbs */}
+          <motion.div
+            className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-[#96FFBF]/30 to-[#00C98D]/30 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.2, 1],
+              x: [0, 50, 0],
+              y: [0, 30, 0],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div
+            className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-[#5ADFA0]/20 to-[#96FFBF]/20 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.3, 1],
+              x: [0, -50, 0],
+              y: [0, -30, 0],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          
+          {/* Floating 360° Camera Icons */}
+          {[...Array(6)].map((_, i) => (
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              key={`camera-${i}`}
+              className="absolute"
+              style={{
+                left: `${20 + (i * 15)}%`,
+                top: `${15 + (i % 3) * 25}%`,
+              }}
+              animate={{
+                y: [0, -30, 0],
+                rotateY: [0, 360],
+                opacity: [0.3, 0.6, 0.3],
+              }}
+              transition={{
+                duration: 5 + i,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: i * 0.5,
+              }}
             >
-              <Link to="/get-a-quote">
-                <Button size="lg" className="bg-gradient-to-r from-primary to-accent">
-                  Get Free Quote
-                  <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-              </Link>
-              <Button size="lg" variant="outline" className="group">
-                <Play className="mr-2 w-4 h-4 group-hover:scale-110 transition-transform" />
-                View Demo Tour
-              </Button>
+              <Camera className="w-8 h-8 text-[#96FFBF]/40" />
             </motion.div>
+          ))}
+
+          {/* Floating Eye/View Icons */}
+          {[...Array(5)].map((_, i) => (
+            <motion.div
+              key={`eye-${i}`}
+              className="absolute"
+              style={{
+                right: `${15 + (i * 12)}%`,
+                top: `${20 + (i % 4) * 20}%`,
+              }}
+              animate={{
+                y: [0, 25, 0],
+                rotateZ: [0, 15, -15, 0],
+                opacity: [0.2, 0.5, 0.2],
+              }}
+              transition={{
+                duration: 6 + i,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: i * 0.3,
+              }}
+            >
+              <Eye className="w-6 h-6 text-[#00C98D]/30" />
+            </motion.div>
+          ))}
+
+          {/* Animated Circles/Rings for 360° effect */}
+          {[...Array(4)].map((_, i) => (
+            <motion.div
+              key={`circle-${i}`}
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-[#96FFBF]/10"
+              style={{
+                width: `${300 + i * 150}px`,
+                height: `${300 + i * 150}px`,
+              }}
+              animate={{
+                rotate: 360,
+                scale: [1, 1.05, 1],
+              }}
+              transition={{
+                rotate: {
+                  duration: 20 + i * 5,
+                  repeat: Infinity,
+                  ease: "linear",
+                },
+                scale: {
+                  duration: 3 + i,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }
+              }}
+            />
+          ))}
+
+          {/* Floating Maximize Icons (representing panoramic view) */}
+          {[...Array(4)].map((_, i) => (
+            <motion.div
+              key={`maximize-${i}`}
+              className="absolute"
+              style={{
+                left: `${10 + (i * 25)}%`,
+                bottom: `${20 + (i % 2) * 30}%`,
+              }}
+              animate={{
+                y: [0, -20, 0],
+                x: [0, 10, 0],
+                rotate: [0, 180, 360],
+                opacity: [0.2, 0.4, 0.2],
+              }}
+              transition={{
+                duration: 7 + i,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: i * 0.4,
+              }}
+            >
+              <Maximize2 className="w-10 h-10 text-[#5ADFA0]/20" />
+            </motion.div>
+          ))}
+
+          {/* Grid Pattern Overlay */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="w-full h-full" style={{
+              backgroundImage: `
+                linear-gradient(to right, #96FFBF 1px, transparent 1px),
+                linear-gradient(to bottom, #96FFBF 1px, transparent 1px)
+              `,
+              backgroundSize: '80px 80px',
+            }} />
           </div>
         </div>
+
+        {/* Content Overlay */}
+        <div className="absolute inset-0 z-10 flex items-center justify-center">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto text-center">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.5, rotateX: -30 }}
+                animate={{ opacity: 1, scale: 1, rotateX: 0 }}
+                transition={{ duration: 1, delay: 0.3 }}
+                className="mb-8"
+              >
+                <motion.div
+                  animate={{
+                    rotateY: [0, 360],
+                  }}
+                  transition={{
+                    duration: 20,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                  className="inline-block"
+                >
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#96FFBF] to-[#00C98D] blur-2xl opacity-50 rounded-full" />
+                    <Camera className="w-20 h-20 text-[#96FFBF] relative z-10" strokeWidth={1.5} />
+                  </div>
+                </motion.div>
+              </motion.div>
+
+              <motion.h1
+                className="text-4xl md:text-5xl lg:text-6xl mb-6 text-white drop-shadow-2xl"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+              >
+                Immersive{' '}
+                <span className="bg-gradient-to-r from-[#96FFBF] to-[#00C98D] bg-clip-text text-transparent">
+                  Virtual Tours
+                </span>{' '}
+                & Photography
+              </motion.h1>
+              
+              <motion.p
+                className="text-xl text-white/90 mb-8 max-w-3xl mx-auto drop-shadow-lg"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.7 }}
+              >
+                Transform how customers experience your business with stunning 360° virtual tours. Increase engagement, build trust, and drive more sales with immersive virtual experiences.
+              </motion.p>
+
+              <motion.div
+                className="flex flex-col sm:flex-row gap-4 justify-center"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.9 }}
+              >
+                <Link to="/get-a-quote">
+                  <Button size="lg" className="bg-gradient-to-r from-[#00C98D] to-[#96FFBF] text-[#1A1A1A] hover:from-[#0A8460] hover:to-[#5ADFA0] shadow-xl">
+                    Get Free Quote
+                    <ArrowRight className="ml-2 w-4 h-4" />
+                  </Button>
+                </Link>
+                <Button size="lg" className="bg-white/10 backdrop-blur-md border-white/20 text-white hover:bg-white/20 shadow-xl group">
+                  <Play className="mr-2 w-4 h-4 group-hover:scale-110 transition-transform" />
+                  View Demo Tour
+                </Button>
+              </motion.div>
+
+              {/* Stats Cards */}
+              <motion.div
+                className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-16 max-w-3xl mx-auto"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1.1 }}
+              >
+                {[
+                  { label: 'Engagement', value: '+60%', icon: TrendingUp },
+                  { label: 'View Time', value: '5x Longer', icon: Eye },
+                  { label: 'Mobile Ready', value: '100%', icon: Smartphone },
+                ].map((stat, idx) => (
+                  <motion.div
+                    key={stat.label}
+                    className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-lg p-4"
+                    whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <stat.icon className="w-6 h-6 text-[#96FFBF] mb-2 mx-auto" />
+                    <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
+                    <div className="text-sm text-white/70">{stat.label}</div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </div>
+          </div>
+        </div>
+
+        {/* Gradient Overlay for better text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40 pointer-events-none" />
       </section>
 
       {/* Benefits Section */}

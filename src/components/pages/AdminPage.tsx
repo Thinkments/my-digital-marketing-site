@@ -18,11 +18,14 @@ import {
   Zap,
   Copy,
   Download,
-  CheckCircle
+  CheckCircle,
+  Users,
+  ClipboardList
 } from 'lucide-react';
 import { toast } from 'sonner@2.0.3';
 import SEO from '../SEO';
 import ExportInstructions from '../admin/ExportInstructions';
+import LeadsManager from './admin/LeadsManager';
 
 export default function AdminPage() {
   const [activeTab, setActiveTab] = useState('overview');
@@ -161,18 +164,22 @@ export default function AdminPage() {
           </motion.div>
 
           <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="grid w-full grid-cols-3">
+            <TabsList className="grid w-full grid-cols-4">
               <TabsTrigger value="overview" className="flex items-center space-x-2">
                 <BarChart3 className="w-4 h-4" />
-                <span>Overview</span>
+                <span className="hidden sm:inline">Overview</span>
+              </TabsTrigger>
+              <TabsTrigger value="leads" className="flex items-center space-x-2">
+                <Users className="w-4 h-4" />
+                <span className="hidden sm:inline">Leads</span>
               </TabsTrigger>
               <TabsTrigger value="seo" className="flex items-center space-x-2">
                 <Settings className="w-4 h-4" />
-                <span>SEO Files</span>
+                <span className="hidden sm:inline">SEO Files</span>
               </TabsTrigger>
               <TabsTrigger value="reports" className="flex items-center space-x-2">
                 <FileText className="w-4 h-4" />
-                <span>Reports</span>
+                <span className="hidden sm:inline">Reports</span>
               </TabsTrigger>
             </TabsList>
 
@@ -244,6 +251,15 @@ export default function AdminPage() {
                     <div className="space-y-3">
                       <Button 
                         variant="outline" 
+                        className="w-full justify-start bg-gradient-to-r from-emerald-50 to-emerald-100 hover:from-emerald-100 hover:to-emerald-200 border-emerald-200"
+                        onClick={() => setActiveTab('leads')}
+                      >
+                        <ClipboardList className="w-4 h-4 mr-2 text-emerald-600" />
+                        <span className="flex-1 text-left">View Client Leads</span>
+                        <Badge className="bg-emerald-500 text-white text-xs">New</Badge>
+                      </Button>
+                      <Button 
+                        variant="outline" 
                         className="w-full justify-start"
                         onClick={() => setActiveTab('seo')}
                       >
@@ -309,6 +325,10 @@ export default function AdminPage() {
                   </div>
                 </CardContent>
               </Card>
+            </TabsContent>
+
+            <TabsContent value="leads" className="space-y-6 mt-6">
+              <LeadsManager />
             </TabsContent>
 
             <TabsContent value="seo" className="space-y-6 mt-6">

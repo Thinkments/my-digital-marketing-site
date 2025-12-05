@@ -6,6 +6,15 @@ import { Card, CardContent } from '../ui/card';
 import { ArrowRight, Zap, Target, Rocket, Users, TrendingUp, Globe, Play, Star, CheckCircle } from 'lucide-react';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 import SEO from '../SEO';
+import { FAQSection } from '../seo/FAQSection';
+import { InternalLinks, CTALinks } from '../seo/InternalLinks';
+import { getSEOConfig } from '../../config/seoPages';
+import { GENERAL_FAQS } from '../../data/faqs';
+import type { InternalLink } from '../seo/InternalLinks';
+import { SEOHead } from '../SEOHead';
+import { generateLocalBusinessSchema, generateOrganizationSchema } from '../../utils/seo';
+import { OptimizedImage } from '../OptimizedImage';
+import { trackCTAClick, trackServiceView } from '../../utils/analytics';
 
 export default function HomePage() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -173,6 +182,49 @@ export default function HomePage() {
       ]
     }
   };
+
+  // Get SEO config
+  const seoConfig = getSEOConfig('home');
+
+  // Related services for internal linking
+  const relatedServices: InternalLink[] = [
+    {
+      title: 'Web Design & Development',
+      description: 'Build a stunning, high-converting website that sets you apart from competitors.',
+      href: '/web-design',
+      category: 'Service'
+    },
+    {
+      title: 'Strategic SEO Services',
+      description: 'Dominate search results and drive qualified organic traffic to your business.',
+      href: '/strategic-seo',
+      category: 'Service'
+    },
+    {
+      title: 'AI Optimization',
+      description: 'Future-proof your content for AI search engines like ChatGPT and Perplexity.',
+      href: '/artificial-intelligence-optimization',
+      category: 'Innovation'
+    },
+    {
+      title: '360° Virtual Tours',
+      description: 'Showcase your business with immersive virtual tours and professional photography.',
+      href: '/virtual-tours',
+      category: 'Service'
+    },
+    {
+      title: 'Professional Videography',
+      description: 'Create compelling video content that captivates your audience and drives conversions.',
+      href: '/videography',
+      category: 'Service'
+    },
+    {
+      title: 'Digital Marketing Strategy',
+      description: 'Comprehensive marketing solutions including SEO, PPC, and social media.',
+      href: '/digital-marketing',
+      category: 'Service'
+    }
+  ];
 
   return (
     <>
@@ -538,6 +590,36 @@ export default function HomePage() {
           </motion.div>
         </div>
       </section>
+
+      {/* Internal Links Section */}
+      <InternalLinks 
+        links={relatedServices}
+        title="Explore Our Digital Marketing Services"
+        description="Discover comprehensive solutions designed to elevate your online presence and drive measurable results for your business"
+        columns={3}
+      />
+
+      {/* FAQ Section */}
+      <FAQSection 
+        faqs={GENERAL_FAQS}
+        title="Frequently Asked Questions About Our Services"
+      />
+
+      {/* CTA Links Section */}
+      <CTALinks
+        primaryCTA={{
+          title: "Ready to Transform Your Marketing?",
+          description: "Get a free consultation and custom marketing strategy tailored to your business goals. No obligations, just expert insights.",
+          href: "/get-a-quote",
+          buttonText: "Get Your Free Audit"
+        }}
+        secondaryCTA={{
+          title: "Explore Our Success Stories",
+          description: "See how we've helped businesses like yours achieve remarkable growth and dominate their markets.",
+          href: "/case-studies",
+          buttonText: "View Case Studies"
+        }}
+      />
     </motion.div>
     </>
   );
