@@ -196,7 +196,7 @@ export default function HomePage() {
                   asChild 
                   size="lg"
                   variant="outline"
-                  className="border-2 border-white text-white hover:bg-white hover:text-[#1E3A5F] font-semibold text-lg px-10"
+                  className="border-2 border-white bg-white text-[#1E3A5F] hover:bg-[#1E3A5F] hover:text-white font-semibold text-lg px-10"
                 >
                   <a href="tel:9403151023" className="flex items-center gap-2">
                     <Phone className="w-5 h-5" />
