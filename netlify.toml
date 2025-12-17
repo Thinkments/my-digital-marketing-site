@@ -31,3 +31,8 @@
 [functions]
   node_bundler = "esbuild"
   external_node_modules = ["@netlify/functions"]
+
+
+# Skip Next.js plugin - this is a React/Vite project
+[build.environment]
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
